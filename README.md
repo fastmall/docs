@@ -1,49 +1,8 @@
 # docs
 fastmall 文档
 
-
-## zookeeper
-```docker-compose
-version: '3.1'
-
-services:
-  zoo1:
-    image: zookeeper
-    restart: always
-    hostname: zoo1
-    networks:
-      - fastmall-net
-    environment:
-      ZOO_MY_ID: 1
-      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
-
-  zoo2:
-    image: zookeeper
-    restart: always
-    hostname: zoo2
-    networks:
-      - fastmall-net
-    environment:
-      ZOO_MY_ID: 2
-      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
-
-  zoo3:
-    image: zookeeper
-    restart: always
-    hostname: zoo3
-    networks:
-      - fastmall-net
-    environment:
-      ZOO_MY_ID: 3
-      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
-
-
-networks:
-  fastmall-net:
-    external:
-      name: fastmall
-```
-
+## network
+`docker network create fastmall`
 
 ## fastmall
 ```docker-compose
@@ -153,6 +112,49 @@ services:
       - zoo1
       - zoo2
       - zoo3
+
+
+networks:
+  fastmall-net:
+    external:
+      name: fastmall
+```
+
+
+## zookeeper
+```docker-compose
+version: '3.1'
+
+services:
+  zoo1:
+    image: zookeeper
+    restart: always
+    hostname: zoo1
+    networks:
+      - fastmall-net
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+
+  zoo2:
+    image: zookeeper
+    restart: always
+    hostname: zoo2
+    networks:
+      - fastmall-net
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+
+  zoo3:
+    image: zookeeper
+    restart: always
+    hostname: zoo3
+    networks:
+      - fastmall-net
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
 
 
 networks:
